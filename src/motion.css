@@ -1,0 +1,306 @@
+:root {
+  --ease-out: cubic-bezier(0.2, 0.7, 0.25, 1);
+  --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --time-fast: 180ms;
+  --time-normal: 320ms;
+}
+
+/* The page changes immediately; only its visual entrance is animated. */
+@keyframes page-arrive {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes type-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes menu-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-stage {
+    animation: page-arrive 350ms var(--ease-out);
+  }
+  .hero-copy > *,
+  .page-intro > :not(.container),
+  .quote-intro .container > * {
+    animation: type-arrive 650ms var(--ease-out) both;
+  }
+  .hero-copy > :nth-child(2),
+  .page-intro h1,
+  .quote-intro h1 {
+    animation-delay: 70ms;
+  }
+  .hero-copy > :nth-child(3),
+  .intro-description,
+  .quote-intro .container > :nth-child(3) {
+    animation-delay: 140ms;
+  }
+  .hero-copy > :nth-child(4) {
+    animation-delay: 200ms;
+  }
+  .hero-copy > :nth-child(5) {
+    animation-delay: 260ms;
+  }
+  .hero-copy > :focus-within,
+  .page-intro > :focus-within {
+    animation: none;
+  }
+  .mobile-nav:not([hidden]) {
+    animation: menu-arrive 230ms var(--ease-out);
+  }
+  .mobile-nav:not([hidden]) > a {
+    animation: menu-arrive 300ms var(--ease-out) both;
+  }
+  .mobile-nav > a:nth-child(2) {
+    animation-delay: 25ms;
+  }
+  .mobile-nav > a:nth-child(3) {
+    animation-delay: 50ms;
+  }
+  .mobile-nav > a:nth-child(4) {
+    animation-delay: 75ms;
+  }
+  .mobile-nav > a:nth-child(5) {
+    animation-delay: 100ms;
+  }
+  .mobile-nav > a:nth-child(6) {
+    animation-delay: 125ms;
+  }
+  .mobile-nav > a:focus-visible {
+    animation: none;
+  }
+}
+
+/* A quiet, persistent header and underlines that grow without moving the text. */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: #fffffff5;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 6px 25px #153f3505;
+}
+.desktop-nav a {
+  transition: color var(--time-fast);
+}
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 23px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--time-normal) var(--ease-out);
+}
+.desktop-nav a.active::after,
+.desktop-nav a:hover::after,
+.desktop-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+.mobile-nav {
+  max-height: calc(100dvh - 84px);
+  overflow-y: auto;
+}
+.mobile-nav a svg {
+  transition: transform var(--time-normal) var(--ease-out);
+}
+.mobile-nav a:hover svg {
+  transform: translate(2px, -2px);
+}
+.menu-toggle {
+  transition:
+    background var(--time-fast),
+    border-color var(--time-fast);
+}
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  background: var(--mint);
+  border-color: #9fbdae;
+}
+@media (min-width: 801px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.button {
+  transition:
+    background var(--time-fast),
+    color var(--time-fast),
+    border-color var(--time-fast),
+    box-shadow var(--time-normal),
+    transform var(--time-normal) var(--ease-out);
+}
+.button svg,
+.text-link svg,
+.technique-links > a > svg {
+  transition: transform var(--time-normal) var(--ease-out);
+}
+.button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.button:disabled {
+  transform: none;
+  box-shadow: none;
+}
+.text-link {
+  transition:
+    border-color var(--time-normal),
+    color var(--time-fast);
+}
+.text-link:hover {
+  gap: 18px;
+  border-color: var(--pine);
+}
+.text-link:focus-visible svg {
+  transform: translateX(4px);
+}
+.filter-bar button {
+  transition:
+    background var(--time-fast),
+    color var(--time-fast),
+    border-color var(--time-fast);
+}
+.product-image,
+.catalog-image,
+.machine-image,
+.equipment-photo {
+  overflow: hidden;
+}
+.product-image img,
+.catalog-image img,
+.machine-image img {
+  transition: transform 650ms var(--ease-out);
+}
+.round-arrow {
+  transition:
+    background var(--time-normal),
+    color var(--time-normal),
+    transform var(--time-normal) var(--ease-out);
+}
+.product-preview h3 {
+  transition: color var(--time-fast);
+}
+.technique-links > a {
+  transition: background var(--time-normal);
+}
+.banner-rings {
+  transition: transform 950ms var(--ease-out);
+}
+.quote-field input,
+.quote-field select,
+.quote-field textarea {
+  transition:
+    border-color var(--time-fast),
+    box-shadow var(--time-fast);
+  scroll-margin-block: 130px;
+}
+.quote-field input:focus,
+.quote-field select:focus,
+.quote-field textarea:focus {
+  box-shadow: 0 0 0 5px #153f3508;
+}
+.location-caption > a {
+  transition:
+    background var(--time-fast),
+    transform var(--time-normal) var(--ease-out);
+}
+.site-footer a {
+  transition: color var(--time-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px #153f3514;
+  }
+  .button:hover svg {
+    transform: translate(2px, -2px);
+  }
+  .text-link:hover svg {
+    transform: translateX(4px);
+  }
+  .product-preview:hover .round-arrow {
+    background: var(--pine);
+    color: white;
+    transform: rotate(5deg);
+  }
+  .product-preview:hover h3 {
+    color: var(--green);
+  }
+  .catalog-card:hover .catalog-image img,
+  .machine-image:hover img {
+    transform: scale(1.025);
+  }
+  .technique-links > a:hover {
+    background: #ffffff70;
+  }
+  .technique-links > a:hover > svg {
+    transform: translate(3px, -3px);
+  }
+  .quote-banner:hover .banner-rings {
+    transform: translateX(20px) scale(1.04);
+  }
+  .location-caption > a:hover {
+    background: var(--green);
+    transform: translateY(-2px);
+  }
+}
+
+/* Give the prepress illustration a complete, crisp silhouette at every size. */
+.prepress-sheet {
+  height: 76%;
+  width: auto;
+  aspect-ratio: 0.78;
+  left: 50%;
+  top: 10%;
+  margin-left: -82px;
+}
+.prepress-sheet-front b {
+  font-size: 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .button:hover,
+  .product-preview:hover img,
+  .catalog-card:hover .catalog-image img,
+  .machine-image:hover img,
+  .quote-banner:hover .banner-rings,
+  .round-arrow,
+  .button:hover svg,
+  .text-link:hover svg,
+  .text-link:focus-visible svg,
+  .technique-links > a:hover > svg,
+  .location-caption > a:hover {
+    transform: none !important;
+  }
+}
